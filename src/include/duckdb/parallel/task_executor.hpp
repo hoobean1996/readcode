@@ -50,6 +50,8 @@ private:
 	atomic<idx_t> total_tasks;
 };
 
+// - UnionByReaderTask
+// - BaseCheckpointTask
 class BaseExecutorTask : public Task {
 public:
 	explicit BaseExecutorTask(TaskExecutor &executor);

@@ -541,6 +541,8 @@ bool Executor::ExecutionIsFinished() {
 }
 
 // Executor执行任务
+// src/parallel/executor.cpp
+// Executor::ExecuteTask
 PendingExecutionResult Executor::ExecuteTask(bool dry_run) {
 	// Only executor should return NO_TASKS_AVAILABLE
 	D_ASSERT(execution_result != PendingExecutionResult::NO_TASKS_AVAILABLE);
@@ -561,6 +563,7 @@ PendingExecutionResult Executor::ExecuteTask(bool dry_run) {
 			current_task = nullptr;
 		} else {
 			// 实际的任务
+			// here means task stealing
 			if (!task) {
 				scheduler.GetTaskFromProducer(*producer, task);
 			}

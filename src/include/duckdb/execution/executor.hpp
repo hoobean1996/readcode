@@ -51,6 +51,7 @@ class Executor {
 	friend class PipelineBuildState;
 
 public:
+	// Consturct a Executor in ClientContext
 	explicit Executor(ClientContext &context);
 	~Executor();
 

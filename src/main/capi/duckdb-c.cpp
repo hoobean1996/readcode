@@ -96,6 +96,9 @@ void duckdb_disconnect(duckdb_connection *connection) {
 	}
 }
 
+
+// c -> duckdb_query
+// duckdb_connection (C)	-> Connection (C++)
 duckdb_state duckdb_query(duckdb_connection connection, const char *query, duckdb_result *out) {
 	Connection *conn = reinterpret_cast<Connection *>(connection);
 	auto result = conn->Query(query);

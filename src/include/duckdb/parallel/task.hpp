@@ -22,6 +22,10 @@ enum class TaskExecutionMode : uint8_t { PROCESS_ALL, PROCESS_PARTIAL };
 enum class TaskExecutionResult : uint8_t { TASK_FINISHED, TASK_NOT_FINISHED, TASK_ERROR, TASK_BLOCKED };
 
 //! Generic parallel task
+// (executor_task.hpp) ExecutorTask: public Task, Execute a task within an executor, including exception handling
+//! This should be used within queries
+// (task_executor.hpp) BaseExecutorTask: public Task (task.hpp)
+// Task
 class Task : public enable_shared_from_this<Task> {
 public:
 	virtual ~Task() {

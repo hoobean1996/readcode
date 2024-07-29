@@ -184,6 +184,7 @@ static string GetAlias(const TableFunctionRef &ref) {
 	return string();
 }
 
+// Binder::BindTableFunctionInternal 
 unique_ptr<LogicalOperator> Binder::BindTableFunctionInternal(TableFunction &table_function,
                                                               const TableFunctionRef &ref, vector<Value> parameters,
                                                               named_parameter_map_t named_parameters,
@@ -230,7 +231,7 @@ unique_ptr<LogicalOperator> Binder::BindTableFunctionInternal(TableFunction &tab
 			return_names[i] = "C" + to_string(i);
 		}
 	}
-
+	// Construct a LogicalGet -> PhysicalGet (plan_get.cpp) -> 
 	auto get = make_uniq<LogicalGet>(bind_index, table_function, std::move(bind_data), return_types, return_names);
 	get->parameters = parameters;
 	get->named_parameters = named_parameters;

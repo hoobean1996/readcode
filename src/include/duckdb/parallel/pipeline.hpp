@@ -25,6 +25,12 @@ class MetaPipeline;
 class PipelineExecutor;
 class Pipeline;
 
+// Task
+//	- ExecutorTask
+//		- PipelineTask
+//	- BaseExecutorTask
+
+
 class PipelineTask : public ExecutorTask {
 	static constexpr const idx_t PARTIAL_CHUNK_COUNT = 50;
 

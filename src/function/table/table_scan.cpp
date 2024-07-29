@@ -116,11 +116,15 @@ static unique_ptr<BaseStatistics> TableScanStatistics(ClientContext &context, co
 	return bind_data.table.GetStatistics(context, column_id);
 }
 
+// TableScanFunc is the core logic to read from disk
 static void TableScanFunc(ClientContext &context, TableFunctionInput &data_p, DataChunk &output) {
 	auto &bind_data = data_p.bind_data->Cast<TableScanBindData>();
 	auto &gstate = data_p.global_state->Cast<TableScanGlobalState>();
 	auto &state = data_p.local_state->Cast<TableScanLocalState>();
 	auto &transaction = DuckTransaction::Get(context, bind_data.table.catalog);
+	// bind_data -> TableScanBindData
+	// table is DuckTableEntry
+	// 	GetStorage() return shared_ptr<DataTable> storage;
 	auto &storage = bind_data.table.GetStorage();
 
 	state.scan_state.options.force_fetch_row = ClientConfig::GetConfig(context).force_fetch_row;
@@ -442,11 +446,12 @@ TableFunction TableScanFunction::GetFunction() {
 	return scan_function;
 }
 
+// TableScanFunction RegisterFunction 
+// table_scan_set 
 void TableScanFunction::RegisterFunction(BuiltinFunctions &set) {
 	TableFunctionSet table_scan_set("seq_scan");
 	table_scan_set.AddFunction(GetFunction());
 	set.AddFunction(std::move(table_scan_set));
-
 	set.AddFunction(GetIndexScanFunction());
 }
 

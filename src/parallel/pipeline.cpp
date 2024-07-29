@@ -165,6 +165,9 @@ void Pipeline::Schedule(shared_ptr<Event> &event) {
 	}
 }
 
+
+// LaunchSanTasks DuckDB 的 Pipeline 类中的 LaunchScanTasks 方法。
+// 这个方法的作用是将扫描任务分成多个部分，并将这些部分调度到不同的线程上执行。
 bool Pipeline::LaunchScanTasks(shared_ptr<Event> &event, idx_t max_threads) {
 	// split the scan up into parts and schedule the parts
 	if (max_threads <= 1) {

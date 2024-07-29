@@ -107,6 +107,7 @@ SourceResultType PhysicalTableScan::GetData(ExecutionContext &context, DataChunk
 		if (gstate.in_out_final) {
 			function.in_out_function_final(context, data, chunk);
 		}
+		// execute table function
 		function.in_out_function(context, data, gstate.input_chunk, chunk);
 		if (chunk.size() == 0 && function.in_out_function_final) {
 			function.in_out_function_final(context, data, chunk);

@@ -96,6 +96,7 @@ unique_ptr<QueryResult> Connection::SendQuery(const string &query) {
 	return context->Query(query, true);
 }
 
+// ::Query by query string
 unique_ptr<MaterializedQueryResult> Connection::Query(const string &query) {
 	auto result = context->Query(query, false);
 	D_ASSERT(result->type == QueryResultType::MATERIALIZED_RESULT);
@@ -130,6 +131,7 @@ DUCKDB_API unique_ptr<QueryResult> Connection::FromSubstraitJSON(const string &j
 	return TableFunction("from_substrait_json", params)->Execute();
 }
 
+// Query by SQLStatement
 unique_ptr<MaterializedQueryResult> Connection::Query(unique_ptr<SQLStatement> statement) {
 	auto result = context->Query(std::move(statement), false);
 	D_ASSERT(result->type == QueryResultType::MATERIALIZED_RESULT);

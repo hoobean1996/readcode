@@ -16,6 +16,8 @@ namespace duckdb {
 class DuckTableEntry;
 class TableCatalogEntry;
 
+
+// TableScanBindData is the parameter to do table scan
 struct TableScanBindData : public TableFunctionData {
 	explicit TableScanBindData(DuckTableEntry &table) : table(table), is_index_scan(false), is_create_index(false) {
 	}
