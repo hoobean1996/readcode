@@ -156,6 +156,8 @@ CollectionScanState::CollectionScanState(TableScanState &parent_p)
       valid_sel(STANDARD_VECTOR_SIZE), parent(parent_p) {
 }
 
+
+// CollectionScanState 
 bool CollectionScanState::Scan(DuckTransaction &transaction, DataChunk &result) {
 	while (row_group) {
 		row_group->Scan(transaction, *this, result);

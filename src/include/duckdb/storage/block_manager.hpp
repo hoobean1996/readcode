@@ -114,6 +114,7 @@ private:
 	//! The lock for the set of blocks
 	mutex blocks_lock;
 	//! A mapping of block id -> BlockHandle
+	// BlockHandle is the reference to a Block
 	unordered_map<block_id_t, weak_ptr<BlockHandle>> blocks;
 	//! The metadata manager
 	unique_ptr<MetadataManager> metadata_manager;

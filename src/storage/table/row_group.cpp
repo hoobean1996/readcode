@@ -455,8 +455,11 @@ template <TableScanType TYPE>
 void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &state, DataChunk &result) {
 	const bool ALLOW_UPDATES = TYPE != TableScanType::TABLE_SCAN_COMMITTED_ROWS_DISALLOW_UPDATES &&
 	                           TYPE != TableScanType::TABLE_SCAN_COMMITTED_ROWS_OMIT_PERMANENTLY_DELETED;
+	// column_ids need to be scanned
 	const auto &column_ids = state.GetColumnIds();
+	// filler_info
 	auto &filter_info = state.GetFilterInfo();
+
 	while (true) {
 		if (state.vector_index * STANDARD_VECTOR_SIZE >= state.max_row_group_row) {
 			// exceeded the amount of rows to scan
@@ -490,6 +493,7 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 		} else {
 			count = max_count;
 		}
+		// GetBlockManager
 		auto &block_manager = GetBlockManager();
 #ifndef DUCKDB_ALTERNATIVE_VERIFY
 		// // in regular operation we only prefetch from remote file systems

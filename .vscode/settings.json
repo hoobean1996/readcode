@@ -74,5 +74,6 @@
     "string": "cpp",
     "string_view": "cpp",
     "tuple": "cpp"
-  }
+  },
+  "cmake.sourceDirectory": "/home/hebin/oss/duckdb/src"
 }

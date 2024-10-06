@@ -182,6 +182,21 @@ perform logicla query optimizatio:
 
 ## Join Ordering
 
+## Join Order
+
+Concentrate on Join Order that is:
+
+- conjunctive queries
+- simple predicates
+- predicates have the form a1 = a2 where a1 is an attribute and a2 is either an attribute or a constant
+- even ignore constants in some algorithms
+
+We join Relations Ri, Ri can be
+
+- a base relation
+- a base relation including selection
+- a more complex building block or access path
+
 - Basics
 - Search Space
 - Greedy Heuristics
@@ -204,3 +219,41 @@ perform logicla query optimizatio:
   - cyclic (there is a cycle)
   - tree
   - grid
+
+Join Tree:
+a join tree is a binary tree with
+
+- join operators as inner nodes
+- relations as leaf nodes
+
+## Join Selectivity
+
+Input:
+-Cardinality |Ri|
+
+- f[i][j] if p[i][j] is the join predicate between Ri and Rj, define f[i][j] = |Ri p[i][j] Rj| / Ri x Rj
+
+- given a join tree T, the cost function is defined as
+  Cout(T) = if T is leaf then R else |T| + Cout(T1) + Cout(T2)
+
+cost differs vastly between join trees,
+different cost functions result in different costs
+the cheapst plan is always the same here, but relative order varies
+join tree with cross product are expensive
+
+but when one relation cardinality is small, cross product is best
+
+## Classification of Join Ordering Problems
+
+- query graph class: chain, cycle, star, clique
+- join tree structure: left-deep, zig-zag, bushy tree
+- join construction: with cross products or without cross products
+  - number of join trees with cross products grows exponentially
+- cost functions: with or without ASI property
+
+4 x 3 x 2 x 2 => totaly 48 different kinds of Join Order problems.
+
+
+Catalan Number: the number of binary tree with n nodes C(n) = 1/n+1 (2n n)
+
+## Chain Query + no Cross Products

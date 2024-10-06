@@ -117,6 +117,12 @@ static unique_ptr<BaseStatistics> TableScanStatistics(ClientContext &context, co
 }
 
 // TableScanFunc is the core logic to read from disk
+// TableScanFunc -> LocalStorage -> DataTable::Scan 
+// -> TableScanState -> CollectionScanState::Scan
+// -> result = RowGroup::Scan
+// -> check result
+// -> row_group.cpp: TemplatedScan<TableScanType::TABLE_SCAN_REGULAR>(transaction, state, result);
+
 static void TableScanFunc(ClientContext &context, TableFunctionInput &data_p, DataChunk &output) {
 	auto &bind_data = data_p.bind_data->Cast<TableScanBindData>();
 	auto &gstate = data_p.global_state->Cast<TableScanGlobalState>();
