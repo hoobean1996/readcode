@@ -47,6 +47,7 @@ void Planner::CreatePlan(SQLStatement &statement) {
 	try {
 		profiler.StartPhase("binder");
 		binder->parameters = &bound_parameters;
+		// binder Bind has overloadded methods,
 		auto bound_statement = binder->Bind(statement);
 		profiler.EndPhase();
 
